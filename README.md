@@ -2,11 +2,11 @@
 ---
 ## Abstract
 
-<p style="color=red">Stellar velocity dispersion (σ) is a fundamental physical parameter that quantifies the random motions of stars within a galaxy and provides critical insights into its dynamical mass, gravitational potential, and evolutionary history. Accurate measurement of σ is essential for understanding galaxy formation, the scaling relations between galaxies and their central black holes, and the mass-to-light ratio of stellar populations.  
+<p style="color=red">Stellar velocity dispersion (σ) is a fundamental physical parameter that quantifies the random motions of stars within a galaxy and provides critical insights into its dynamical mass, gravitational potential, and evolutionary history. Accurate measurement of σ is essential for understanding galaxy formation, the scaling relations between galaxies and their central black holes, and the mass-to-light ratio of stellar populations.</p>  
 
-This project, **vdisp_fit**, presents a robust and automated Python pipeline for measuring stellar velocity dispersions from galaxy spectra, particularly from large spectroscopic surveys such as the Sloan Digital Sky Survey (SDSS). The pipeline employs direct spectral fitting by convolving high-resolution stellar templates from the MILES library with a Gaussian broadening function, combined with an additive polynomial to account for continuum variations. A stable χ² minimization routine is used to separate non-linear broadening from linear components, ensuring accurate and efficient fitting.  
+<p style="color=red">This project, **vdisp_fit**, presents a robust and automated Python pipeline for measuring stellar velocity dispersions from galaxy spectra, particularly from large spectroscopic surveys such as the Sloan Digital Sky Survey (SDSS). The pipeline employs direct spectral fitting by convolving high-resolution stellar templates from the MILES library with a Gaussian broadening function, combined with an additive polynomial to account for continuum variations. A stable χ² minimization routine is used to separate non-linear broadening from linear components, ensuring accurate and efficient fitting.  </p>
 
-**vdisp_fit** offers both a command-line interface and a library function, enabling flexible batch processing, robust error estimation, instrumental correction, and visualization of results. By providing an end-to-end automated solution, this pipeline facilitates the study of galaxy kinematics and contributes to the broader understanding of galaxy structure and evolution.</p>
+<p style="color=red">**vdisp_fit** offers both a command-line interface and a library function, enabling flexible batch processing, robust error estimation, instrumental correction, and visualization of results. By providing an end-to-end automated solution, this pipeline facilitates the study of galaxy kinematics and contributes to the broader understanding of galaxy structure and evolution.</p>
 
 ---
 
