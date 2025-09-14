@@ -76,10 +76,11 @@ This will iterate over all galaxy spectra in the folder, fit them with all 985 t
 
 ## Acknowledgements
 
-* This pipeline was developed as a project report at IUCAA.
-* Built upon foundational work in galaxy kinematics, including Faber & Jackson (1976) and modern techniques like pPXF.
-* Uses publicly available data from the **[Sloan Digital Sky Survey (SDSS)](https://www.sdss.org/)** and the **MILES stellar library**.
-* Special thanks to **[Dr. Gulab Chand Dewangan](https://www.iucaa.in/en/faculty-research/gulabd)**, my supervisor, for guidance and support throughout this project.
+This project would not have been possible without the invaluable guidance, encouragement, and mentorship of **[Dr. Gulab Chand Dewangan](https://www.iucaa.in/en/faculty-research/gulabd)**.  
+I am deeply grateful for his patience in answering my questions, for inspiring me to explore complex problems in galaxy kinematics, and for providing unwavering support throughout the development of this pipeline.  
+His expertise and dedication have been a constant source of learning and motivation, and I am truly humbled to have had the opportunity to work under his guidance.  
+
+I also acknowledge the use of publicly available data from the **[Sloan Digital Sky Survey (SDSS)](https://www.sdss.org/)** and the **MILES stellar library**, as well as the foundational work in galaxy kinematics by Faber & Jackson (1976) and modern spectral fitting techniques like pPXF.
 
 ---
 
