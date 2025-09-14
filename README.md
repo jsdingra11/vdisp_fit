@@ -1,6 +1,3 @@
-Here’s a **well-organized GitHub README** for your `vdisp_fit` project, including proper Markdown formatting, headings, code blocks, and an acknowledgement to your supervisor. I’ve formatted it to be clean, professional, and readable on GitHub.
-
-````markdown
 # vdisp_fit: A Stellar Velocity Dispersion Fitting Pipeline
 
 Stellar velocity dispersion (σ) is a fundamental parameter in galaxy dynamics, providing insights into the mass, formation history, and evolution of galaxies.  
@@ -90,5 +87,3 @@ This will iterate over all galaxy spectra in the folder, fit them with all 985 t
 
 **Jashanpreet Singh Dingra**
 *Date: September 1, 2025*
-want me to do that?
-```
