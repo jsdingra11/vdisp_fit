@@ -86,5 +86,5 @@ I also acknowledge the use of publicly available data from the **[Sloan Digital 
 
 ## Author
 
-**Jashanpreet Singh Dingra**
+**Jashanpreet Singh Dingra** <br>
 **Date: September 1, 2025**
