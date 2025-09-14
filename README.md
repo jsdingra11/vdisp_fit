@@ -74,8 +74,9 @@ print(results)
 *(Make sure to keep Mile Template, vdisp\_fit.py in the same working folder.)* <br>
 This will iterate over all galaxy spectra in the folder, fit them with all 985 templates, and provide clear results for each galaxy.
 
-Example Output Plot:  
+Example Terminal Process:  
 ![Fitting Result](output.png)
+
 
 ---
 
