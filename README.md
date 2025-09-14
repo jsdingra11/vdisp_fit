@@ -75,7 +75,10 @@ print(results)
 This will iterate over all galaxy spectra in the folder, fit them with all 985 templates, and provide clear results for each galaxy.
 
 Example Terminal Process:  
-![Fitting Result](output.png)
+![Terminal Output](output.png)
+<br>
+Example Fitted Plots:  
+![Fitting Result](plot.png)
 
 
 ---
