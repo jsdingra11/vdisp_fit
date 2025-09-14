@@ -1,124 +1,117 @@
-Ah! That explains it — GitHub Markdown **does not fully support HTML for styling**. Inline CSS like `style="color:#..."` **won’t render** on GitHub README.md. So we need to rely on **native Markdown features** and clever use of syntax highlighting/code blocks to add “color-like” emphasis.
-
-We can make it visually appealing **without emojis** by using:
-
-* `diff` blocks for green/red highlights
-* `yaml` or `ini` for subtle coloring
-* Bold/italic for emphasis
-* Table formatting for organization
-* Code blocks for code snippets
-
-Here’s a **full working colorful version** compatible with GitHub:
-
-````markdown
-# vdisp_fit : A Stellar Velocity Dispersion Fitting Pipeline
+# vdisp_fit :  A Stellar Velocity Dispersion Fitting Pipeline
 ---
-
 ## Abstract
 
-Stellar velocity dispersion (**σ**) is a fundamental physical parameter that quantifies the random motions of stars within a galaxy and provides critical insights into its dynamical mass, gravitational potential, and evolutionary history. Accurate measurement of **σ** is essential for understanding galaxy formation, scaling relations between galaxies and their central black holes, and the mass-to-light ratio of stellar populations.
+Stellar velocity dispersion (σ) is a fundamental physical parameter that quantifies the random motions of stars within a galaxy and provides critical insights into its dynamical mass, gravitational potential, and evolutionary history. Accurate measurement of σ is essential for understanding galaxy formation, the scaling relations between galaxies and their central black holes, and the mass-to-light ratio of stellar populations.  
 
-This project, **vdisp_fit**, presents a robust and automated Python pipeline for measuring stellar velocity dispersions from galaxy spectra, particularly from large spectroscopic surveys such as the Sloan Digital Sky Survey (SDSS). The pipeline employs direct spectral fitting by convolving high-resolution stellar templates from the MILES library with a Gaussian broadening function, combined with an additive polynomial to account for continuum variations. A stable **χ²** minimization routine is used to separate non-linear broadening from linear components, ensuring accurate and efficient fitting.
+This project, **vdisp_fit**, presents a robust and automated Python pipeline for measuring stellar velocity dispersions from galaxy spectra, particularly from large spectroscopic surveys such as the Sloan Digital Sky Survey (SDSS). The pipeline employs direct spectral fitting by convolving high-resolution stellar templates from the MILES library with a Gaussian broadening function, combined with an additive polynomial to account for continuum variations. A stable χ² minimization routine is used to separate non-linear broadening from linear components, ensuring accurate and efficient fitting.  
 
-**vdisp_fit** offers both a command-line interface and a library function, enabling flexible batch processing, robust error estimation, instrumental correction, and visualization of results.
+**vdisp_fit** offers both a command-line interface and a library function, enabling flexible batch processing, robust error estimation, instrumental correction, and visualization of results. By providing an end-to-end automated solution, this pipeline facilitates the study of galaxy kinematics and contributes to the broader understanding of galaxy structure and evolution.
+
+---
+
+**vdisp_fit** is a robust and automated Python pipeline designed to measure the stellar velocity dispersion (σ) of galaxies from spectroscopic surveys, such as the Sloan Digital Sky Survey (SDSS).  
+It employs a direct spectral fitting technique by convolving a high-resolution stellar template from the MILES library with a Gaussian broadening function to model the observed galaxy spectrum.
+
+The core methodology is built on a stable χ² minimization routine that separates the non-linear broadening search from the linear components of the fit, ensuring a robust and efficient solution.
 
 ---
 
 ## Key Features
 
-```diff
-+ Robust Fitting       : Stable additive model with analytical linear least-squares
-+ Flexible Input       : Single FITS file or batch directory processing
-+ Instrumental Correction : Corrects for galaxy-template resolution differences
-+ Error Estimation     : Provides 1-σ uncertainty on the final velocity dispersion
-+ Command-Line Tool    : Run directly from terminal
-+ Plotting Capabilities: Single-fit and batch summary plots
-+ Single-File Module   : Entire pipeline in one Python script (vdisp_fit.py)
-````
+- **Robust Fitting**: Utilizes a stable additive model with an analytical linear least-squares solution, avoiding issues with local minima.  
+- **Flexible Input**: Can process a single galaxy FITS file or a batch of files from an entire directory.  
+- **Instrumental Correction**: Corrects the fitted velocity dispersion for instrumental resolution differences between the galaxy and template spectra.  
+- **Error Estimation**: Provides a robust 1-σ uncertainty on the final velocity dispersion measurement.  
+- **Command-Line Tool**: Can be run directly from the terminal with a simple command structure.  
+- **Plotting Capabilities**: Generates detailed single-fit plots and summary plots for batch processing to visualize results.  
+- **Single-File Module**: Entire pipeline contained in a single Python script (`vdisp_fit.py`) for easy distribution and use.
 
 ---
 
 ## Methodology
 
-### 1. Data Pre-processing
+The pipeline's methodology follows a four-step process:
 
-```yaml
-Redshift Correction   : Shift spectra to rest-frame using SDSS redshift
-Logarithmic Rebinning : Rebin to log wavelength scale for constant pixel broadening
-Masking               : Mask strong emission lines and bad pixels
-```
+### 1. Data Pre-processing
+- **Redshift Correction**: Galaxy spectra are shifted to their rest-frame using the SDSS-provided redshift.  
+- **Logarithmic Rebinning**: Spectra are rebinned to a logarithmic wavelength scale, ensuring that kinematic broadening corresponds to a constant pixel shift.  
+- **Masking**: Strong emission lines and bad pixels are masked out to prevent contamination of the stellar continuum fit.
 
 ### 2. The Fitting Model
 
-The observed galaxy spectrum G\_obs is modeled as:
+The observed galaxy spectrum *G_obs* is modeled as a broadened stellar template *T* combined with an additive polynomial *Pₖ* to account for continuum variations:
 
-```math
-G_model(ln λ) = c0 * [T(ln λ) * B(v, σ)] + Σ ck Pk(ln λ)
-```
+$$
+G_{model}(\ln \lambda) = c_0 \cdot [T(\ln \lambda) * B(v, \sigma)] + \sum_{k=1}^{N} c_k P_k(\ln \lambda)
+$$
 
-* B = Gaussian broadening function
-* c0,...,cN = linear coefficients
-* Pk = additive polynomial
+- *B* is a Gaussian broadening function.  
+- *c₀,...,c_N* are linear coefficients.
 
 ### 3. χ² Minimization
 
-```diff
-+ Iterate through trial σ values
-+ Solve optimal linear coefficients analytically
-+ Compute χ² for each σ
-+ Best-fit σ = σ with minimum χ²
-```
+- The pipeline iterates through a grid of trial σ values.  
+- For each σ, the optimal linear coefficients are solved analytically, and the corresponding χ² value is calculated.  
+- The σ that yields the minimum χ² is identified as the best-fit velocity dispersion.
 
-### 4. Instrumental Correction & Error Estimation
+### 4. Instrumental Correction and Error Estimation
 
-```diff
-+ Corrected dispersion : σ_gal = sqrt(σ_fit^2 - σ_inst^2)
-+ 1-σ error from χ² curvature near minimum
-```
+- The measured dispersion is corrected for instrumental broadening:
+
+  $$
+  \sigma_{gal} = \sqrt{\sigma_{fit}^2 - \sigma_{inst}^2}
+  $$
+
+- The 1-σ error is estimated from the curvature of the χ² curve near its minimum.
 
 ---
 
 ## Requirements
 
+Install the required Python libraries using pip:
+
 ```bash
 pip install numpy matplotlib scipy astropy
-```
+````
 
 ---
 
 ## Usage
 
-### Command-Line Tool
+### As a Command-Line Tool
+
+Run the pipeline from the terminal:
 
 ```bash
 python vdisp_fit.py <input_path> <template_folder> [options]
 ```
 
-**Arguments**
+#### Arguments
 
-```yaml
-<input_path>       : Single FITS file or directory
-<template_folder>  : Directory containing MILES stellar templates
-```
+* `<input_path>`: Path to a single galaxy FITS file or directory containing multiple FITS files.
+* `<template_folder>`: Path to the directory containing the MILES stellar template FITS files.
 
-**Options**
+#### Options
 
-```yaml
--o, --output            : CSV file to save results
--p, --plot              : Display plots
---poly_degree           : Degree of additive polynomial (default=8)
---velscale              : km/s per pixel (default=60.0)
---fit_range             : Wavelength range in Å (e.g., 4200 6500)
---instrumental_sigma    : Instrumental dispersion (default=25.0)
-```
+* `-o`, `--output`: Name of the CSV file to save results (e.g., `results.csv`).
+* `-p`, `--plot`: Display plots of the fits.
+* `--poly_degree`: Degree of the additive polynomial (default: 8).
+* `--velscale`: Velocity scale in km/s per pixel (default: 60.0).
+* `--fit_range`: Wavelength range for fitting in Å (e.g., `4200 6500`).
+* `--instrumental_sigma`: Instrumental dispersion difference in km/s (default: 25.0).
 
-**Example**
+#### Example
 
 ```bash
 python vdisp_fit.py ./galaxy_spectra/ ./miles_templates/ -o results.csv --plot
 ```
 
-### Library Function
+---
+
+### As a Library Function
+
+Import and use `vdisp_fit` in another Python script:
 
 ```python
 from vdisp_fit import vdisp_fit
@@ -137,25 +130,12 @@ print(results)
 
 ## Acknowledgements
 
-Developed at IUCAA, based on Faber & Jackson (1976) and the **pPXF method** by Cappellari & Emsellem (2004). Uses SDSS data and MILES stellar library.
-
-**Author:** Jashanpreet Singh Dingra
-**Supervisor:** Dr. Gulab Chand Dewangan
-**Date:** September 1, 2025
-
-```
-
-✅ **Why this works on GitHub:**
-
-- `diff` blocks = green/red highlight  
-- `yaml` = subtle blue-ish tone  
-- Code/math blocks = gray background  
-- Bold/italic = emphasis  
-- Fully Markdown compliant  
+This pipeline was developed as a project report at IUCAA.
+It builds upon foundational work in galaxy kinematics, including the pioneering work of Faber & Jackson (1976) and modern techniques like the **pPXF method** developed by Cappellari & Emsellem (2004).
+It utilizes publicly available data from the Sloan Digital Sky Survey (SDSS) and the MILES stellar library.
 
 ---
 
-If you want, I can make an **even more visually distinct version with alternating colored blocks** for sections that will **look colorful without breaking GitHub**.  
-
-Do you want me to do that next?
-```
+**Author**: Jashanpreet Singh Dingra
+**Supervisor**: Dr. Gulab Chand Dewangan
+**Date**: September 1, 2025
